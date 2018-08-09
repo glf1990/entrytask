@@ -1,0 +1,24 @@
+from flask import Flask,abort,jsonify
+import flask_restful
+from app.api import api
+from app.util import *
+from app.code import Code
+
+app = Flask(__name__)
+app.register_blueprint(api)
+
+def make_result(data=None, code=Code.SUCCESS_CODE):
+    return jsonify({"error_code": code,  "error_messag": Code.msg[code],"reference":data})
+
+def custom_abord(http_status_code, *args, **kwargs):
+    if http_status_code == 400:
+        print "testeetetetet"
+        abort(make_result(code=Code.PARAMS_ERRCODE))
+    else :
+        abort(make_result(data=None,code=Code.SYSTEM_ERRCODE))
+    return abort(http_status_code)
+
+flask_restful.abort = custom_abord
+
+if __name__ == "__main__":
+    app.run(debug=True)
