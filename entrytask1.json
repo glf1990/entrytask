@@ -1,0 +1,55 @@
+[
+    {
+        "config": {
+            "variables": [], 
+            "request": {
+                "headers": {
+                    "User-Agent": "YDrive Client Mac"
+                }, 
+                "base_url": ""
+            }, 
+            "name": "testset description"
+        }
+    }, 
+    {
+        "test": {
+            "validate": [
+                {
+                    "eq": [
+                        "status_code", 
+                        200
+                    ]
+                }, 
+                {
+                    "eq": [
+                        "headers.Content-Type", 
+                        "application/json"
+                    ]
+                }, 
+                {
+                    "eq": [
+                        "content.error_code", 
+                        21
+                    ]
+                }, 
+                {
+                    "eq": [
+                        "content.error_messag", 
+                        "empty or wrong params"
+                    ]
+                }, 
+                {
+                    "eq": [
+                        "content.reference", 
+                        "entrytest"
+                    ]
+                }
+            ], 
+            "request": {
+                "url": "http://10.12.113.161:5000/shopee/test", 
+                "method": "GET"
+            }, 
+            "name": "/shopee/test"
+        }
+    }
+]
