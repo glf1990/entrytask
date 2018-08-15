@@ -9,9 +9,10 @@ app.register_blueprint(api)
 def my_abort(http_status_code, *args, **kwargs):
     if http_status_code == 400:
        abort(make_result(code=Code.PARAMS_ERRCODE))
-    else:
-       abort( make_result(code=Code.SYSTEM_ERRCODE))
 
 flask_restful.abort = my_abort
+@app.errorhandler(404)
+def page_not_found(e):
+    return (make_result(code=Code.SYSTEM_ERRCODE))
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)

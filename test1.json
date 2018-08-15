@@ -1,0 +1,59 @@
+[
+    {
+        "config": {
+            "name": "testset description",
+            "variables": [],
+            "request": {
+                "base_url": "",
+                "headers": {
+                    "User-Agent": "Charles/4.2.6"
+                }
+            }
+        }
+    },
+    {
+        "test": {
+            "name": "/shopee/test",
+            "request": {
+                "params": {
+                    "a": "1",
+                    "b": "\"nihao\""
+                },
+                "url": "http://127.0.0.1:5000/shopee/test",
+                "method": "GET"
+            },
+            "validate": [
+                {
+                    "eq": [
+                        "status_code",
+                        200
+                    ]
+                },
+                {
+                    "eq": [
+                        "headers.Content-Type",
+                        "application/json"
+                    ]
+                },
+                {
+                    "eq": [
+                        "content.error_code",
+                        0
+                    ]
+                },
+                {
+                    "eq": [
+                        "content.error_messag",
+                        "success"
+                    ]
+                },
+                {
+                    "eq": [
+                        "content.reference",
+                        "1\"nihao\""
+                    ]
+                }
+            ]
+        }
+    }
+]
